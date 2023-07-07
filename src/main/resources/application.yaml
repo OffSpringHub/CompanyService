@@ -1,0 +1,16 @@
+server:
+  port: 8086
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/EmployeeDB?createDatabaseIfNotExist=true
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  application:
+    name: EMPLOYEE-SERVICE
+
+  config:
+    import: optional:configserver:http://localhost:9296/
