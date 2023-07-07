@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "addresse")
+
 public class Addresse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

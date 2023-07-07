@@ -20,4 +20,5 @@ public class Competence {
     @Column(name = "libelle", nullable = false, unique = true)
     private  String libelle;
 
+
 }
