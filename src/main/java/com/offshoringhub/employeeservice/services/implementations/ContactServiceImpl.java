@@ -2,13 +2,15 @@ package com.offshoringhub.employeeservice.services.implementations;
 
 import com.offshoringhub.employeeservice.entities.Addresse;
 import com.offshoringhub.employeeservice.entities.Contact;
-import com.offshoringhub.employeeservice.exceptions.addresse.NotFoundException;
+import com.offshoringhub.employeeservice.exceptions.exceptionModel.NotFoundException;
 import com.offshoringhub.employeeservice.models.addresse.AddresseRequest;
+import com.offshoringhub.employeeservice.models.addresse.AddresseResponse;
 import com.offshoringhub.employeeservice.models.contact.ContactRequest;
 import com.offshoringhub.employeeservice.models.contact.ContactResponse;
 import com.offshoringhub.employeeservice.repositories.ContactRepository;
 import com.offshoringhub.employeeservice.services.AddresseService;
 import com.offshoringhub.employeeservice.services.ContactService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,37 +22,61 @@ public class ContactServiceImpl implements ContactService {
 
     @Autowired
     AddresseService addresseService ;
+
     @Override
-    public ContactResponse getContactById(Long idcontact) {
-        Contact contact = contactRepository.findById(idcontact).orElseThrow(()-> new NotFoundException("Contact not found"));
-        AddresseRequest addresse = AddresseRequest.builder()
-                .pays(contact.getAddresse().getPays())
-                .numero(contact.getAddresse().getNumero())
-                .zipCode(contact.getAddresse().getZipCode())
-                .rue(contact.getAddresse().getRue())
+    public void addContact(ContactRequest contactRequest) {
+    Addresse     addresse= Addresse.builder()
+            .numero(contactRequest.getAddresse().getNumero())
+                .zipCode(contactRequest.getAddresse().getZipCode())
+                .pays(contactRequest.getAddresse().getPays())
+                .rue(contactRequest.getAddresse().getRue())
+                .ville(contactRequest.getAddresse().getVille())
                 .build();
 
-        return ContactResponse.
-                builder()
-                .email(contact.getEmail())
-                .siteweb(contact.getSiteweb())
+        Contact contact = Contact.builder()
+                .siteweb(contactRequest.getSiteweb())
+                .email(contactRequest.getEmail())
+                .Phone(contactRequest.getPhone())
                 .addresse(addresse)
-                .Phone(contact.getPhone())
                 .build();
-    }
-
-    @Override
-    public ContactResponse addContact(ContactRequest contactRequest) {
-        return null;
+        contactRepository.save(contact);
     }
 
     @Override
     public void deleteContact(Long idContact) {
-        contactRepository.deleteById(idContact);
+        Contact contact  = contactRepository.findById(idContact).orElseThrow(()->new NotFoundException("Contact not found"));
+        contactRepository.delete(contact);
     }
 
     @Override
     public ContactResponse updateContact(Long idContact, ContactRequest contactRequest) {
+        Contact contact =  contactRepository.findById(idContact).orElseThrow(()->new NotFoundException("Contact not found"));
+        Addresse addresse = Addresse.builder()
+                .idAddresse(contactRequest.getAddresse().getIdAddresse())
+                .numero(contactRequest.getAddresse().getNumero())
+                .zipCode(contactRequest.getAddresse().getZipCode())
+                .pays(contactRequest.getAddresse().getPays())
+                .rue(contactRequest.getAddresse().getRue())
+                .build();
+        contact.setAddresse(addresse);
+        contact.setEmail(contactRequest.getEmail());
+        contact.setSiteweb(contactRequest.getSiteweb());
+        contact.setPhone(contactRequest.getPhone());
+        contactRepository.save(contact);
         return null;
+    }
+
+    @Override
+    public ContactResponse findByContactById(Long id) {
+        Contact contact =  contactRepository.findById(id).orElseThrow(()->new NotFoundException("Contact not found"));
+        AddresseResponse addresseResponse = new AddresseResponse();
+        BeanUtils.copyProperties(contact.getAddresse(),addresseResponse);
+        return ContactResponse
+                .builder()
+                .Phone(contact.getPhone())
+                .email(contact.getEmail())
+                .siteweb(contact.getSiteweb())
+                .addresse(addresseResponse)
+                .build();
     }
 }

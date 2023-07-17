@@ -1,11 +1,13 @@
 package com.offshoringhub.employeeservice.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "contact")
 public class Contact {
@@ -17,7 +19,7 @@ public class Contact {
     private String Phone;
     private String email;
     private String siteweb;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_addresse")
     private Addresse addresse;
 

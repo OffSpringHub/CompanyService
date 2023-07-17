@@ -1,7 +1,7 @@
 package com.offshoringhub.employeeservice.services.implementations;
 
 import com.offshoringhub.employeeservice.entities.Competence;
-import com.offshoringhub.employeeservice.exceptions.addresse.NotFoundException;
+import com.offshoringhub.employeeservice.exceptions.exceptionModel.NotFoundException;
 import com.offshoringhub.employeeservice.models.Competence.CompetenceRequest;
 import com.offshoringhub.employeeservice.models.Competence.CompetenceResponse;
 import com.offshoringhub.employeeservice.repositories.CompetenceRepository;

@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class AddresseResponse {
+    private Long idAddresse;
     private String ville;
     private String rue;
     private  String numero;

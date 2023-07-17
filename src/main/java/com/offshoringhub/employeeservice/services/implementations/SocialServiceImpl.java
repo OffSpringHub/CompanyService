@@ -1,7 +1,7 @@
 package com.offshoringhub.employeeservice.services.implementations;
 
 import com.offshoringhub.employeeservice.entities.Socials;
-import com.offshoringhub.employeeservice.exceptions.addresse.NotFoundException;
+import com.offshoringhub.employeeservice.exceptions.exceptionModel.NotFoundException;
 import com.offshoringhub.employeeservice.models.socials.SocialRest;
 import com.offshoringhub.employeeservice.repositories.SocialsRepository;
 import com.offshoringhub.employeeservice.services.SocialService;

@@ -1,6 +1,6 @@
 package com.offshoringhub.employeeservice.exceptions.restException;
 
-import com.offshoringhub.employeeservice.exceptions.addresse.NotFoundException;
+import com.offshoringhub.employeeservice.exceptions.exceptionModel.NotFoundException;
 import com.offshoringhub.employeeservice.models.exception.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

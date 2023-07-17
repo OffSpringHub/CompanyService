@@ -1,7 +1,7 @@
 package com.offshoringhub.employeeservice.services.implementations;
 
 import com.offshoringhub.employeeservice.entities.Addresse;
-import com.offshoringhub.employeeservice.exceptions.addresse.NotFoundException;
+import com.offshoringhub.employeeservice.exceptions.exceptionModel.NotFoundException;
 import com.offshoringhub.employeeservice.models.addresse.AddresseRequest;
 import com.offshoringhub.employeeservice.models.addresse.AddresseResponse;
 import com.offshoringhub.employeeservice.repositories.AddresseRepository;
@@ -50,6 +50,7 @@ public class AddresseServiceImpl implements AddresseService {
     public AddresseResponse getAddresseById(Long id) {
         Addresse addresse  = addresseRepository.findById(id).orElseThrow(()->new NotFoundException("Addresse not found"));
         return AddresseResponse.builder()
+                .idAddresse(addresse.getIdAddresse())
                 .rue(addresse.getRue())
                 .ville(addresse.getVille())
                 .pays(addresse.getPays())

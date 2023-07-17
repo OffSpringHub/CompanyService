@@ -19,7 +19,7 @@ public class Employee {
     @Column(name = "idEmployee", nullable = false)
     private Long idEmployee;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "societe_idsociete")
     Societe societe;
 

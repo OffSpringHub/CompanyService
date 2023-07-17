@@ -13,7 +13,7 @@ import lombok.*;
 
 public class Addresse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_addresse", nullable = false)
     private Long idAddresse;
     private String ville;

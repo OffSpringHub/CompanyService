@@ -1,4 +1,4 @@
-package com.offshoringhub.employeeservice.exceptions.addresse;
+package com.offshoringhub.employeeservice.exceptions.exceptionModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

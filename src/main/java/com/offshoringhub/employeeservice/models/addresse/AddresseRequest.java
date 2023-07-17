@@ -9,9 +9,11 @@ import lombok.*;
 @Setter
 @Builder
 public class AddresseRequest {
+    private Long idAddresse;
     private String ville;
     private String rue;
     private  String numero;
     private String pays;
     private String zipCode;
+
 }
